@@ -37,7 +37,6 @@ namespace PRIMERA_API.Controllers
 
             return clientes;
         }
-
         // GET: api/Clientes/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Cliente>> GetCliente(int id)
@@ -55,7 +54,6 @@ namespace PRIMERA_API.Controllers
 
             return cliente;
         }
-
         // PUT: api/Clientes/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
@@ -87,7 +85,6 @@ namespace PRIMERA_API.Controllers
 
             return NoContent();
         }
-
         // POST: api/Clientes
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
@@ -104,7 +101,6 @@ namespace PRIMERA_API.Controllers
 
             return CreatedAtAction("GetCliente", new { id = cliente.ClienteID }, cliente);
         }
-
         // DELETE: api/Clientes/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCliente(int id)

@@ -25,7 +25,6 @@ namespace PRIMERA_API.Controllers
             _context = context;
             this.mapper = mapper;
         }
-
         // GET: api/Alquilers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Alquiler>>> GetAlquiler()

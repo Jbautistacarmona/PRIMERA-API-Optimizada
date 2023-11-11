@@ -24,7 +24,6 @@ namespace PRIMERA_API.Controllers
             _context = context;
             _mapper = mapper;
         }
-
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Tipovehiculo>>> GetTipoVehiculo()
         {
@@ -50,7 +49,6 @@ namespace PRIMERA_API.Controllers
 
             return tipovehiculo;
         }
-
         [HttpPut("{id}")]
         public async Task<IActionResult> PutTipovehiculo(int id, TipovehiculoUpdateDto tiposvehiculodto)
         {
@@ -83,7 +81,6 @@ namespace PRIMERA_API.Controllers
                 return StatusCode(500, $"Error interno del servidor: {ex.Message}");
             }
         }
-
         [HttpPost]
         public async Task<ActionResult<Tipovehiculo>> PostTipovehiculo(TipovehiculoCrearDto tipoVehiculoDto)
         {
@@ -94,7 +91,6 @@ namespace PRIMERA_API.Controllers
 
             return CreatedAtAction(nameof(GetTipovehiculo), new { id = tipovehiculo.TipoVehiculoID }, tipovehiculo);
         }
-
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTipovehiculo(int id)
         {
