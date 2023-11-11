@@ -17,36 +17,30 @@ namespace PRIMERA_API.Controllers
     public class TipovehiculosController : ControllerBase
     {
         private readonly PARCIAL1Context _context;
-        private readonly IMapper mapper;
+        private readonly IMapper _mapper;
 
         public TipovehiculosController(PARCIAL1Context context, IMapper mapper)
         {
             _context = context;
-            this.mapper = mapper;
+            _mapper = mapper;
         }
 
-        // GET: api/Tipovehiculos
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Tipovehiculo>>> GetTipoVehiculo()
         {
             var tipovehiculo = await _context.TipoVehiculo.ToListAsync();
 
-            if (tipovehiculo == null)
+            if (tipovehiculo == null || !tipovehiculo.Any())
             {
                 return NotFound();
             }
 
             return tipovehiculo;
         }
-
         // GET: api/Tipovehiculos/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Tipovehiculo>> GetTipovehiculo(int id)
         {
-          if (_context.TipoVehiculo == null)
-          {
-              return NotFound();
-          }
             var tipovehiculo = await _context.TipoVehiculo.FindAsync(id);
 
             if (tipovehiculo == null)
@@ -57,63 +51,55 @@ namespace PRIMERA_API.Controllers
             return tipovehiculo;
         }
 
-        // PUT: api/Tipovehiculos/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutTipovehiculo(int id, TipovehiculoUpdateDto tiposvehiculodto)
         {
-            if (id != tiposvehiculodto.TipoVehiculoID)
-            {
-                return BadRequest();
-            }
-            var tipovehiculo = mapper.Map<Tipovehiculo>(tiposvehiculodto);
-
-            _context.Entry(tipovehiculo).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!TipovehiculoExists(id))
+                if (id != tiposvehiculodto.TipoVehiculoID)
                 {
-                    return NotFound();
+                    return BadRequest("ID no coincide con el objeto a actualizar.");
                 }
-                else
-                {
-                    throw;
-                }
-            }
 
-            return NoContent();
+                var existingTipovehiculo = await _context.TipoVehiculo.FindAsync(id);
+
+                if (existingTipovehiculo == null)
+                {
+                    return NotFound("Tipo de vehículo no encontrado.");
+                }
+
+                // Actualizamos solo las propiedades necesarias
+                existingTipovehiculo.Nombre = tiposvehiculodto.Nombre;
+                existingTipovehiculo.TarifaPorDia = tiposvehiculodto.TarifaPorDia;
+
+                _context.Entry(existingTipovehiculo).State = EntityState.Modified;
+
+                await _context.SaveChangesAsync();
+
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error interno del servidor: {ex.Message}");
+            }
         }
 
-        // POST: api/Tipovehiculos
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Tipovehiculo>> PostTipovehiculo(TipovehiculoCrearDto tiposvehiculodto)
+        public async Task<ActionResult<Tipovehiculo>> PostTipovehiculo(TipovehiculoCrearDto tipoVehiculoDto)
         {
-          if (_context.TipoVehiculo == null)
-          {
-              return Problem("Entity set 'PARCIAL1Context.TiposVehiculo'  is null.");
-          }
-            var tipovehiculo = mapper.Map<Tipovehiculo>(tiposvehiculodto);
+            var tipovehiculo = _mapper.Map<Tipovehiculo>(tipoVehiculoDto);
+
             _context.TipoVehiculo.Add(tipovehiculo);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetTipovehiculo", new { id = tipovehiculo.TipoVehiculoID }, tipovehiculo);
+            return CreatedAtAction(nameof(GetTipovehiculo), new { id = tipovehiculo.TipoVehiculoID }, tipovehiculo);
         }
 
-        // DELETE: api/Tipovehiculos/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTipovehiculo(int id)
         {
-            if (_context.TipoVehiculo == null)
-            {
-                return NotFound();
-            }
             var tipovehiculo = await _context.TipoVehiculo.FindAsync(id);
+
             if (tipovehiculo == null)
             {
                 return NotFound();
@@ -127,7 +113,8 @@ namespace PRIMERA_API.Controllers
 
         private bool TipovehiculoExists(int id)
         {
-            return (_context.TipoVehiculo?.Any(e => e.TipoVehiculoID == id)).GetValueOrDefault();
+            return _context.TipoVehiculo.Any(e => e.TipoVehiculoID == id);
         }
     }
 }
+

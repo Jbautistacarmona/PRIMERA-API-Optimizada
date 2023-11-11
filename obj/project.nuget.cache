@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "HGRndIs4LPO1q9iClpXj6N8oGMfCQXueC7nBfEiBmqfOYsyIHOk9Zu92fgGm6Ep/OaLZYXmfw5+Xkbf7bnEY1g==",
+  "dgSpecHash": "qKNrTT0dHU6Fq7BgaJygQgyx/xYNb1vLGOhVTJ2gpr9rJ0ZldwmUsiQhb3P3EGcdb+U479OUkNFYoBkpaET4dw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\thedo\\Desktop\\ver2 creando API\\PRIMERA-API Optimizada\\PRIMERA API.csproj",
+  "projectFilePath": "C:\\Users\\thedo\\Documents\\GitHub\\PRIMERA-API-Optimizada\\PRIMERA API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\thedo\\.nuget\\packages\\audit.entityframework.core\\21.1.0\\audit.entityframework.core.21.1.0.nupkg.sha512",
     "C:\\Users\\thedo\\.nuget\\packages\\audit.net\\21.1.0\\audit.net.21.1.0.nupkg.sha512",

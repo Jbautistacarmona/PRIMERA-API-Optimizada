@@ -12820,11 +12820,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\thedo\\Desktop\\ver2 creando API\\PRIMERA-API Optimizada\\PRIMERA API.csproj",
+      "projectUniqueName": "C:\\Users\\thedo\\Documents\\GitHub\\PRIMERA-API-Optimizada\\PRIMERA API.csproj",
       "projectName": "PRIMERA API",
-      "projectPath": "C:\\Users\\thedo\\Desktop\\ver2 creando API\\PRIMERA-API Optimizada\\PRIMERA API.csproj",
+      "projectPath": "C:\\Users\\thedo\\Documents\\GitHub\\PRIMERA-API-Optimizada\\PRIMERA API.csproj",
       "packagesPath": "C:\\Users\\thedo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\thedo\\Desktop\\ver2 creando API\\PRIMERA-API Optimizada\\obj\\",
+      "outputPath": "C:\\Users\\thedo\\Documents\\GitHub\\PRIMERA-API-Optimizada\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\thedo\\AppData\\Roaming\\NuGet\\NuGet.Config",
